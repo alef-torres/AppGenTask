@@ -7,9 +7,9 @@ package controller;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.ArrayList;
 import model.Task;
 import util.ConnectionFactory;
@@ -46,9 +46,10 @@ public class TaskController {
             statement.setDate(6, new Date(task.getDeadline().getTime()));
             statement.setDate(7, new Date(task.getCreateAt().getTime()));
             statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
+
             statement.execute();
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro ao salvar a terefa."
                     + ex.getMessage(), ex);
         } finally {
@@ -87,7 +88,7 @@ public class TaskController {
             statement.setInt(9, task.getId());
             statement.execute();
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro ao atualizar a terefa."
                     + ex.getMessage(), ex);
         } finally {
@@ -97,7 +98,10 @@ public class TaskController {
     }
 
     public void removeById(int taskId) throws SQLException {
+        
         String sql = "DELETE FROM tasks WHERE id = ?";
+        
+        
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -108,8 +112,9 @@ public class TaskController {
             statement.setInt(1, taskId);
             statement.execute();
 
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao deletar a tarefa.");
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao deletar a tarefa."
+            + ex.getMessage(), ex);
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }
@@ -147,13 +152,14 @@ public class TaskController {
 
                 tasks.add(task);
             }
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao ver todas as tarefas.");
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao ver todas as tarefas."
+            + ex.getMessage(), ex);
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }
 
-        return null;
+        return tasks;
     }
 
 }

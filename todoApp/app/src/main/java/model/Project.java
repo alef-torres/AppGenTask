@@ -6,20 +6,26 @@ package model;
 
 import java.util.Date;
 
+
 public class Project {
     
     private int id;
     private String name;
     private String description;
-    private Date creatAt;
-    private Date updateAt;
+    private Date createdAt;
+    private Date updatedAt;
 
-    public Project(int id, String name, String description, Date creatAt, Date updateAt) {
+    public Project(int id, String name, String description, Date creatAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.creatAt = creatAt;
-        this.updateAt = updateAt;
+        this.createdAt = creatAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Project() {
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
 
     public int getId() {
@@ -46,25 +52,25 @@ public class Project {
         this.description = description;
     }
 
-    public Date getCreatAt() {
-        return creatAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatAt(Date creatAt) {
-        this.creatAt = creatAt;
+    public void setCreatedAt(Date creatAt) {
+        this.createdAt = creatAt;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(Date updateAt) {
+        this.updatedAt = updateAt;
     }
 
     @Override
     public String toString() {
-        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", creatAt=" + creatAt + ", updateAt=" + updateAt + '}';
+        return "Project{" + "id=" + id + ", name=" + name + ", description=" + description + ", creatAt=" + createdAt + ", updateAt=" + updatedAt + '}';
     }
     
     
