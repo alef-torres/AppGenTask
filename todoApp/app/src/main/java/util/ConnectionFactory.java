@@ -6,6 +6,7 @@ package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ConnectionFactory {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (Exception ex) {
-            throw new RuntimeException("ERRO, sem conexão com o banco de dados");
+            throw new RuntimeException("ERRO, sem conexão com o banco de dados, verifique a conexão com a rede.");
         }
     }
 
@@ -33,7 +34,20 @@ public class ConnectionFactory {
                 Connection.close();
                 }
             }catch (Exception ex){
-                throw new RuntimeException("ERRO, erro ao fechar a conexão com o bando de dados");
+                throw new RuntimeException("ERRO, erro ao fechar a conexão com o bando de dados.");
+            }
+        }
+    
+    public static void  closeConnection(Connection Connection, PreparedStatement statement){
+        try {
+            if (Connection != null){
+                Connection.close();
+                }
+            if (statement != null){
+                statement.close();
+            }
+            }catch (Exception ex){
+                throw new RuntimeException("ERRO, erro ao fechar a conexão com o bando de dados.");
             }
         }
     
