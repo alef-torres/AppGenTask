@@ -57,7 +57,7 @@ public class ProjectController {
                 + "description = ?,"
                 + "createdAt = ?,"
                 + "updatedAt = ? "
-                + "WHERE id + ?";
+                + "WHERE id = ? ";
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -105,7 +105,7 @@ public class ProjectController {
 
     public List<Project> getAll() {
 
-        String sql = "SELCET * FROM projects";
+        String sql = "SELECT * FROM projects";
 
         List<Project> projects = new ArrayList<>();
 
@@ -117,6 +117,7 @@ public class ProjectController {
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 Project project = new Project();
@@ -125,7 +126,7 @@ public class ProjectController {
                 project.setName(resultSet.getString("name"));
                 project.setDescription(resultSet.getString("description"));
                 project.setCreatedAt(resultSet.getDate("createdAt"));
-                project.setCreatedAt(resultSet.getDate("updatedAt"));
+                project.setUpdatedAt(resultSet.getDate("updatedAt"));
                 
                 projects.add(project);
                 
@@ -137,6 +138,6 @@ public class ProjectController {
             ConnectionFactory.closeConnection(connection, statement);
         }
 
-        return null;
+        return projects;
     }
 }

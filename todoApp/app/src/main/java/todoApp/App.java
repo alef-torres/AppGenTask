@@ -4,25 +4,24 @@
 package todoApp;
 
 import controller.ProjectController;
+import controller.TaskController;
 import model.Project;
+import model.Task;
 
 public class App {
 
     public static void main(String[] args) {
     
-        ProjectController projectController = new ProjectController();
-        Project project = new Project();
+        Task task = new Task();
+        TaskController conn = new TaskController();
         
         
-        /* teste projectController.save 
-        project.setName("Teste");
-        project.setDescription("descricao");
-        projectController.save(project);*/
+        task.setId(3);
+        task.setIdProject(2);
+        task.setName("teste3");
         
-        project.setId(3);
-        project.setName("teste92");
-        project.setDescription("carai");
-        projectController.update(project);
+        
+        System.out.println(conn.getAll(2));
         
     }
 }

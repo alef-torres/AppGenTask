@@ -24,7 +24,7 @@ public class TaskController {
 
         String sql = "INSERT INTO tasks (idProject,"
                 + " name,"
-                + " descrition,"
+                + " description,"
                 + " completed,"
                 + " notes,"
                 + " deadline,"
@@ -58,7 +58,7 @@ public class TaskController {
 
     }
 
-    public void updata(Task task) {
+    public void update(Task task) {
 
         String sql = "UPDATE tasks SET idproject = ?,"
                 + "name = ?,"
@@ -97,7 +97,7 @@ public class TaskController {
 
     }
 
-    public void removeById(int taskId) throws SQLException {
+    public void removeById(int taskId) {
         
         String sql = "DELETE FROM tasks WHERE id = ?";
         
@@ -147,14 +147,13 @@ public class TaskController {
                 task.setDescription(resultSet.getString("description"));
                 task.setIsCompleted(resultSet.getBoolean("completed"));
                 task.setDeadline(resultSet.getDate("deadline"));
-                task.setCreateAt(resultSet.getDate("createAt"));
-                task.setUpdatedAt(resultSet.getDate("updateAt"));
+                task.setCreateAt(resultSet.getDate("createdAt"));
+                task.setUpdatedAt(resultSet.getDate("updatedAt"));
 
                 tasks.add(task);
             }
-        } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao ver todas as tarefas."
-            + ex.getMessage(), ex);
+        } catch (Exception ex) {
+            throw new RuntimeException("Erro ao ver todas as tarefas.", ex);
         } finally {
             ConnectionFactory.closeConnection(connection, statement);
         }

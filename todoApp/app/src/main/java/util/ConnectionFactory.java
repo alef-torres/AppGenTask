@@ -24,7 +24,7 @@ public class ConnectionFactory {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
         } catch (Exception ex) {
-            throw new RuntimeException("ERRO, sem conexão com o banco de dados, verifique a conexão com a rede.");
+            throw new RuntimeException("ERRO, sem conexao com o banco de dados, verifique a conexao com a rede.");
         }
     }
 
@@ -34,7 +34,7 @@ public class ConnectionFactory {
                 Connection.close();
                 }
             }catch (Exception ex){
-                throw new RuntimeException("ERRO, erro ao fechar a conexão com o bando de dados.");
+                throw new RuntimeException("ERRO, erro ao fechar a conexao com o bando de dados.");
             }
         }
     
@@ -47,7 +47,7 @@ public class ConnectionFactory {
                 statement.close();
             }
             }catch (Exception ex){
-                throw new RuntimeException("ERRO, erro ao fechar a conexão com o bando de dados.");
+                throw new RuntimeException("ERRO, erro ao fechar a conexao com o bando de dados.");
             }
         }
     
