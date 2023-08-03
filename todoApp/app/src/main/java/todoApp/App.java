@@ -7,21 +7,11 @@ import controller.ProjectController;
 import controller.TaskController;
 import model.Project;
 import model.Task;
+import view.MainScrean;
 
 public class App {
 
     public static void main(String[] args) {
-    
-        Task task = new Task();
-        TaskController conn = new TaskController();
-        
-        
-        task.setId(3);
-        task.setIdProject(2);
-        task.setName("teste3");
-        
-        
-        System.out.println(conn.getAll(2));
-        
+
     }
 }
