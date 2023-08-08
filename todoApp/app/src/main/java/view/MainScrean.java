@@ -97,7 +97,6 @@ public class MainScrean extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 900));
-        setResizable(false);
 
         jPanelToolBar.setBackground(new java.awt.Color(49, 175, 145));
 
@@ -264,6 +263,7 @@ public class MainScrean extends javax.swing.JFrame {
         jTable1Tasks.setGridColor(java.awt.Color.white);
         jTable1Tasks.setRowHeight(50);
         jTable1Tasks.setSelectionBackground(new java.awt.Color(49, 175, 145));
+        jTable1Tasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTable1Tasks);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
