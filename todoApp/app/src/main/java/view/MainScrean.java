@@ -92,7 +92,7 @@ public class MainScrean extends javax.swing.JFrame {
                 .addComponent(jLabelListaVaziaIcon)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelListaVaziaText)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,14 +119,14 @@ public class MainScrean extends javax.swing.JFrame {
                 .addGroup(jPanelToolBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1ToolBarTitle)
                     .addComponent(jLabel2ToolBarText))
-                .addContainerGap(643, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelToolBarLayout.setVerticalGroup(
             jPanelToolBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelToolBarLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
                 .addComponent(jLabel1ToolBarTitle)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2ToolBarText)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -141,6 +141,11 @@ public class MainScrean extends javax.swing.JFrame {
         JListProjects.setFixedCellHeight(40);
         JListProjects.setSelectionBackground(new java.awt.Color(49, 175, 145));
         JListProjects.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        JListProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JListProjectsMouseClicked(evt);
+            }
+        });
         jScrollPaneProjects.setViewportView(JListProjects);
 
         javax.swing.GroupLayout jPanelProjectsListLayout = new javax.swing.GroupLayout(jPanelProjectsList);
@@ -156,7 +161,7 @@ public class MainScrean extends javax.swing.JFrame {
             jPanelProjectsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelProjectsListLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPaneProjects, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addComponent(jScrollPaneProjects, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,6 +269,11 @@ public class MainScrean extends javax.swing.JFrame {
         jTable1Tasks.setRowHeight(50);
         jTable1Tasks.setSelectionBackground(new java.awt.Color(49, 175, 145));
         jTable1Tasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1Tasks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1TasksMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1Tasks);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -281,7 +291,7 @@ public class MainScrean extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -324,6 +334,31 @@ public class MainScrean extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jLabelTaskIconADDMouseClicked
+
+    private void jTable1TasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1TasksMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = jTable1Tasks.rowAtPoint(evt.getPoint());
+        int columnIndex = jTable1Tasks.columnAtPoint(evt.getPoint());
+
+        switch (columnIndex) {
+            case 3:
+                Task task = taskmodel.getTasks().get(rowIndex);
+                taskController.update(task);
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+
+        }
+    }//GEN-LAST:event_jTable1TasksMouseClicked
+
+    private void JListProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JListProjectsMouseClicked
+        // TODO add your handling code here:
+        int projectIndex = JListProjects.getSelectedIndex();
+        Project project = (Project) projectsModel.get(projectIndex);
+
+    }//GEN-LAST:event_JListProjectsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -389,6 +424,28 @@ public class MainScrean extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneProjects;
     private javax.swing.JTable jTable1Tasks;
     // End of variables declaration//GEN-END:variables
+
+    private void showJTableTasks(boolean isEmptyTable) {
+        if (isEmptyTable) {
+            if (jPanelEmptyTasksLayout.isVisible()) {
+                jPanelEmptyTasksLayout.setVisible(false);
+                jPanelEmptyTasks.remove(jPanelEmptyTasksLayout);
+            }
+
+            jPanelEmptyTasks.add(jScrollPaneTasks);
+            jScrollPaneTasks.setVisible(true);
+            jScrollPaneTasks.setSize(jPanelEmptyTasks.getWidth(), jPanelEmptyTasks.getHeight());
+        } else {
+            if (jScrollPaneTasks.isVisible()) {
+                jScrollPaneTasks.setVisible(false);
+                jPanelEmptyTasks.remove(jScrollPaneTasks);
+            }
+
+            jPanelEmptyTasks.add(jPanelEmptyTasksLayout);
+            jPanelEmptyTasksLayout.setVisible(true);
+            jPanelEmptyTasksLayout.setSize(jPanelEmptyTasks.getWidth(), jPanelEmptyTasks.getHeight());
+        }
+    }
 
     public void decoratedeTableTask() {
 
